@@ -1,0 +1,87 @@
+{
+  "trips": [
+    {
+      "id": 1,
+      "trip_name": "Klatring for nybegyndere",
+      "date": "31/02",
+      "time": "10:00",
+      "location": "København",
+      "duration": "2 timer",
+      "packingList": "Madpakke, vand, varmt tøj, klatresko"
+    },
+    {
+      "id": 2,
+      "name": "Sightseeing i København",
+      "date": "01/03",
+      "time": "13:00",
+      "location": "København",
+      "duration": "3 timer",
+      "packingList": "Vand, varmt tøj, gode sko"
+    },
+    {
+      "id": 3,
+      "name": "Mountainbiking i skoven",
+      "date": "20/04",
+      "time": "10:00",
+      "location": "Hareskoven",
+      "duration": "4 timer",
+      "packingList": "Hjelm, vand, madpakke"
+    },
+    {
+      "id": 4,
+      "name": "Klatring for øvede",
+      "date": "21/04",
+      "time": "16:00",
+      "location": "Boulders",
+      "duration": "4 timer",
+      "packingList": "Klatresko, kalk, vand, madpakke"
+    },
+    {
+      "id": 5,
+      "name": "Strandtur",
+      "date": "22/04",
+      "time": "13:00",
+      "location": "Amager Strandpark",
+      "duration": "3 timer",
+      "packingList": "solcreme, håndklæde, madpakke, vand"
+    }
+  ],
+  "guides": [
+    {
+      "guide_name": "John Doe",
+      "gender": "Male",
+      "birthyear": 1985,
+      "profile": "Experienced outdoor enthusiast with a passion for adventure sports.",
+      "image_url": "https://example.com/john-doe.jpg"
+    },
+    {
+      "guide_name": "Jane Smith",
+      "gender": "Female",
+      "birthyear": 1990,
+      "profile": "Knowledgeable guide specializing in nature exploration and hiking.",
+      "image_url": "https://example.com/jane-smith.jpg"
+    },
+    {
+      "guide_name": "Michael Johnson",
+      "gender": "Male",
+      "birthyear": 1982,
+      "profile": "Passionate rock climber and certified climbing instructor.",
+      "image_url": "https://example.com/michael-johnson.jpg"
+    },
+    {
+      "guide_name": "Emily Anderson",
+      "gender": "Female",
+      "birthyear": 1995,
+      "profile": "Enthusiastic outdoor guide with expertise in mountain biking and trail exploration.",
+      "image_url": "https://example.com/emily-anderson.jpg"
+    },
+    {
+      "guide_name": "Alex Ramirez",
+      "gender": "Male",
+      "birthyear": 1993,
+      "profile": "Experienced outdoor guide specialized in organizing sightseeing tours.",
+      "image_url": "https://example.com/alex-ramirez.jpg"
+    }
+  ]
+}
+
