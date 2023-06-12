@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import {dinnereventURLAll,dinnereventURLDelete} from "../Setting.js";
+import React, { useEffect, useState } from "react";
+import { dinnereventURLAll, dinnereventURLDelete } from "../Setting.js";
 
 const AllDinnerEvents = () => {
   const [dinnerEvents, setDinnerEvents] = useState([]);
 
   useEffect(() => {
     fetch(dinnereventURLAll)
-      .then(response => response.json())
-      .then(data => setDinnerEvents(data))
-      .catch(error => console.error(error));
+      .then((response) => response.json())
+      .then((data) => setDinnerEvents(data))
+      .catch((error) => console.error(error));
   }, []);
 
   const handleDeleteEvent = (event) => {
-    console.log('Deleting event:', event);
+    console.log("Deleting event:", event);
 
     fetch(dinnereventURLDelete, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(event)
+      body: JSON.stringify(event),
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
-          console.log('Event deleted successfully');
+          console.log("Event deleted successfully");
           // Henter alle events igen efter sletning
           fetch(dinnereventURLAll)
-            .then(response => response.json())
-            .then(data => setDinnerEvents(data))
-            .catch(error => console.error(error));
+            .then((response) => response.json())
+            .then((data) => setDinnerEvents(data))
+            .catch((error) => console.error(error));
         } else {
-          throw new Error('Failed to delete event');
+          throw new Error("Failed to delete event");
         }
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -53,7 +53,7 @@ const AllDinnerEvents = () => {
             </tr>
           </thead>
           <tbody>
-            {dinnerEvents.map(event => (
+            {dinnerEvents.map((event) => (
               <tr key={event.id}>
                 <td>{event.eventname}</td>
                 <td>{event.dish}</td>

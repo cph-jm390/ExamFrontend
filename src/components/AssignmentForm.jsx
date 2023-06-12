@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import {dinnereventURLAll,assignmentURLCreate} from "../Setting.js";
+import React, { useState, useEffect } from "react";
+import { dinnereventURLAll, assignmentURLCreate } from "../Setting.js";
 
 const AssignmentForm = () => {
-  const [familyname, setFamilyname] = useState('');
-  const [date, setDate] = useState('');
-  const [contactInfo, setContactInfo] = useState('');
-  const [eventname, setEventname] = useState('');
-  const [eventId, setEventId] = useState('');
+  const [familyname, setFamilyname] = useState("");
+  const [date, setDate] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
+  const [eventname, setEventname] = useState("");
+  const [eventId, setEventId] = useState("");
   const [eventnames, setEventnames] = useState([]);
-  const [creationStatus, setCreationStatus] = useState('');
+  const [creationStatus, setCreationStatus] = useState("");
 
   useEffect(() => {
     fetch(dinnereventURLAll)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setEventnames(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }, []);
 
   const handleEventSelection = (event) => {
     const selectedEvent = event.target.value;
-    const eventItem = eventnames.find(item => item.eventname === selectedEvent);
+    const eventItem = eventnames.find(
+      (item) => item.eventname === selectedEvent
+    );
     if (eventItem) {
       setEventname(selectedEvent);
       setEventId(eventItem.id);
     } else {
-      setEventname('');
-      setEventId('');
+      setEventname("");
+      setEventId("");
     }
   };
 
@@ -40,34 +42,33 @@ const AssignmentForm = () => {
       date,
       contactInfo,
       eventname,
-      eventid: eventId, 
+      eventid: eventId,
     };
     console.log(formData);
 
     // Sender form data til backend the backend
     fetch(assignmentURLCreate, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
-      .then(response => response.json())
-      .then(data => {
-        
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
 
         // Tømmer lige inputfelterne
-        setFamilyname('');
-        setDate('');
-        setContactInfo('');
-        setEventname('');
-        setEventId('');
+        setFamilyname("");
+        setDate("");
+        setContactInfo("");
+        setEventname("");
+        setEventId("");
 
         // bekræfter det er gået godt
-        setCreationStatus('Assignment was created');
+        setCreationStatus("Assignment was created");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -89,17 +90,29 @@ const AssignmentForm = () => {
       <br />
       <label>
         Familyname:
-        <input type="text" value={familyname} onChange={e => setFamilyname(e.target.value)} />
+        <input
+          type="text"
+          value={familyname}
+          onChange={(e) => setFamilyname(e.target.value)}
+        />
       </label>
       <br />
       <label>
         Date:
-        <input type="text" value={date} onChange={e => setDate(e.target.value)} />
+        <input
+          type="text"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
       </label>
       <br />
       <label>
         Contact Info:
-        <input type="text" value={contactInfo} onChange={e => setContactInfo(e.target.value)} />
+        <input
+          type="text"
+          value={contactInfo}
+          onChange={(e) => setContactInfo(e.target.value)}
+        />
       </label>
       <br />
       <button onClick={handleSubmit}>Submit</button>

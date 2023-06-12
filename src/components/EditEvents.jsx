@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {dinnereventURLUpdate,dinnereventURLAll} from "../Setting.js";
+import React, { useEffect, useState } from "react";
+import { dinnereventURLUpdate, dinnereventURLAll } from "../Setting.js";
 
 const EditEvents = () => {
   const [dinnerEvents, setDinnerEvents] = useState([]);
@@ -7,39 +7,39 @@ const EditEvents = () => {
 
   useEffect(() => {
     fetch(dinnereventURLAll)
-      .then(response => response.json())
-      .then(data => setDinnerEvents(data))
-      .catch(error => console.error(error));
+      .then((response) => response.json())
+      .then((data) => setDinnerEvents(data))
+      .catch((error) => console.error(error));
   }, []);
 
-  const handleEditEvent = event => {
+  const handleEditEvent = (event) => {
     setEditEvent(event);
   };
 
   const handleUpdateEvent = () => {
     if (editEvent) {
       const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editEvent)
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editEvent),
       };
 
       fetch(dinnereventURLUpdate, requestOptions)
-        .then(response => {
+        .then((response) => {
           if (response.ok) {
             // opdaterer dinner event
-            setDinnerEvents(prevEvents =>
-              prevEvents.map(prevEvent =>
+            setDinnerEvents((prevEvents) =>
+              prevEvents.map((prevEvent) =>
                 prevEvent.id === editEvent.id ? editEvent : prevEvent
               )
             );
             // Resetter edit event
             setEditEvent(null);
           } else {
-            throw new Error('Failed to update dinner event');
+            throw new Error("Failed to update dinner event");
           }
         })
-        .catch(error => console.error(error));
+        .catch((error) => console.error(error));
     }
   };
 
@@ -60,7 +60,7 @@ const EditEvents = () => {
             </tr>
           </thead>
           <tbody>
-            {dinnerEvents.map(event => (
+            {dinnerEvents.map((event) => (
               <tr key={event.id}>
                 <td>{event.eventname}</td>
                 <td>{event.dish}</td>
@@ -80,53 +80,53 @@ const EditEvents = () => {
           <h2>Edit Dinner Event</h2>
           <p>Event ID: {editEvent.id}</p>
           <p>
-            Event Name:{' '}
+            Event Name:{" "}
             <input
               type="text"
               value={editEvent.eventname}
-              onChange={e =>
-                setEditEvent(prevEvent => ({
+              onChange={(e) =>
+                setEditEvent((prevEvent) => ({
                   ...prevEvent,
-                  eventname: e.target.value
+                  eventname: e.target.value,
                 }))
               }
             />
           </p>
           <p>
-            Dish:{' '}
+            Dish:{" "}
             <input
               type="text"
               value={editEvent.dish}
-              onChange={e =>
-                setEditEvent(prevEvent => ({
+              onChange={(e) =>
+                setEditEvent((prevEvent) => ({
                   ...prevEvent,
-                  dish: e.target.value
+                  dish: e.target.value,
                 }))
               }
             />
           </p>
           <p>
-            Location:{' '}
+            Location:{" "}
             <input
               type="text"
               value={editEvent.location}
-              onChange={e =>
-                setEditEvent(prevEvent => ({
+              onChange={(e) =>
+                setEditEvent((prevEvent) => ({
                   ...prevEvent,
-                  location: e.target.value
+                  location: e.target.value,
                 }))
               }
             />
           </p>
           <p>
-            Price:{' '}
+            Price:{" "}
             <input
               type="number"
               value={editEvent.price}
-              onChange={e =>
-                setEditEvent(prevEvent => ({
+              onChange={(e) =>
+                setEditEvent((prevEvent) => ({
                   ...prevEvent,
-                  price: parseInt(e.target.value)
+                  price: parseInt(e.target.value),
                 }))
               }
             />

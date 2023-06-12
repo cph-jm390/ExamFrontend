@@ -47,10 +47,10 @@ function App() {
     return (
       <div>
         <ul className="header">
-        <li>
+          <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          {/* frontend limiter ud fra roller */}
+          {/* frontend limiter ud fra role */}
           {loggedIn && (
             <>
               {user.roles === "admin" && (
@@ -62,18 +62,17 @@ function App() {
                   <li>
                     <NavLink to="/editevents">Edit events</NavLink>
                   </li>
-                  
                 </>
               )}
               <li>
-            <NavLink to="/assignmentform">Assign family</NavLink>
-          </li>
-          <li>
-            <NavLink to="/allassignments">All assignments</NavLink>
-          </li>
-          <li>
-            <NavLink to="/alldinnerevents">All event</NavLink>
-          </li>
+                <NavLink to="/assignmentform">Assign family</NavLink>
+              </li>
+              <li>
+                <NavLink to="/allassignments">All assignments</NavLink>
+              </li>
+              <li>
+                <NavLink to="/alldinnerevents">All event</NavLink>
+              </li>
               <li>
                 <NavLink to="/profilepage">Profile</NavLink>
               </li>
@@ -127,9 +126,12 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
-         <Route path="/alldinnerevents" element={<AllDinnerevents user={user}/>} />
-         <Route path="/assignmentform" element={<AssignmentForm/>} />
-          <Route path="/allassignments" element={<AllAssignments />} />
+        <Route
+          path="/alldinnerevents"
+          element={<AllDinnerevents user={user} />}
+        />
+        <Route path="/assignmentform" element={<AssignmentForm />} />
+        <Route path="/allassignments" element={<AllAssignments />} />
 
         <Route path="/logout" element={<Logout />} />
         {/* front end limiter ud fra roller */}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {assignmentURLAll,assignmentURLAdduser} from "../Setting.js";
+import React, { useEffect, useState } from "react";
+import { assignmentURLAll, assignmentURLAdduser } from "../Setting.js";
 
 const AllAssignments = () => {
   const [assignments, setAssignments] = useState([]);
@@ -7,15 +7,15 @@ const AllAssignments = () => {
 
   useEffect(() => {
     fetch(assignmentURLAll)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const initialUserInputs = data.reduce((acc, assignment) => {
-          return { ...acc, [assignment.id]: '' };
+          return { ...acc, [assignment.id]: "" };
         }, {});
         setUserInputs(initialUserInputs);
         setAssignments(data);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   }, []);
 
   const handleAddUser = (id) => {
@@ -23,30 +23,30 @@ const AllAssignments = () => {
 
     const requestBody = {
       id: id,
-      userInput: userInput
+      userInput: userInput,
     };
 
-    console.log('Data sent to POST:', requestBody);
+    console.log("Data sent to POST:", requestBody);
 
     fetch(assignmentURLAdduser, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
-          console.log('User added successfully');
+          console.log("User added successfully");
         } else {
-          throw new Error('Failed to add user');
+          throw new Error("Failed to add user");
         }
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   };
 
   const handleUserInputChange = (id, value) => {
-    setUserInputs(prevState => {
+    setUserInputs((prevState) => {
       return { ...prevState, [id]: value };
     });
   };
@@ -68,7 +68,7 @@ const AllAssignments = () => {
             </tr>
           </thead>
           <tbody>
-            {assignments.map(assignment => (
+            {assignments.map((assignment) => (
               <tr key={assignment.id}>
                 <td>{assignment.familyname}</td>
                 <td>{assignment.eventname}</td>
@@ -78,7 +78,9 @@ const AllAssignments = () => {
                   <input
                     type="text"
                     value={userInputs[assignment.id]}
-                    onChange={e => handleUserInputChange(assignment.id, e.target.value)}
+                    onChange={(e) =>
+                      handleUserInputChange(assignment.id, e.target.value)
+                    }
                   />
                   <button onClick={() => handleAddUser(assignment.id)}>
                     Add User
