@@ -4,10 +4,11 @@ import LogIn from "./components/LoginForm";
 import LoggedIn from "./components/LoggedIn";
 import TripForm from "./components/TripForm";
 import DinnereventForm from "./components/DinnereventForm";
-import GetAllGuides from "./components/GetAllGuides";
+import EditEvents from "./components/EditEvents";
 import { NavLink, Route, Routes } from "react-router-dom";
 import AssignToTrips from "./components/AssignToTrips";
 import EditTrips from "./components/EditTrips";
+import AllDinnerevents from "./components/allDinnerevents";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -55,14 +56,13 @@ function App() {
               {user.roles === "admin" && (
                 <>
                   <li>
-                    <NavLink to="/dinnerform">Guide Form</NavLink>
+                    <NavLink to="/dinnerform">Ny event</NavLink>
                   </li>
+
                   <li>
-                    <NavLink to="/tripform">Trip Form</NavLink>
+                    <NavLink to="/editevents">Edit events</NavLink>
                   </li>
-                  <li>
-                    <NavLink to="/getallguides">All guides</NavLink>
-                  </li>
+                  
                   <li>
                     <NavLink to="/edittrips">Edit Trip</NavLink>
                   </li>
@@ -70,7 +70,7 @@ function App() {
               )}
               
           <li>
-            <NavLink to="/assigntotrips">Tilmeld trip</NavLink>
+            <NavLink to="/alldinnerevents">All events</NavLink>
           </li>
               <li>
                 <NavLink to="/profilepage">Profile</NavLink>
@@ -126,13 +126,14 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
          <Route path="/assigntotrips" element={<AssignToTrips  user={user} />} />
+         <Route path="/alldinnerevents" element={<AllDinnerevents user={user}/>} />
         <Route path="/logout" element={<Logout />} />
         {user.roles === "admin" && (
           <>
             <Route path="/dinnerform" element={<DinnereventForm />} />
-            <Route path="/edittrips" element={<EditTrips />} />
+            <Route path="/editevents" element={<EditEvents />} />
             <Route path="/tripform" element={<TripForm />} />
-            <Route path="/getallguides" element={<GetAllGuides />} />
+            
           </>
         )}
         <Route
