@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {dinnereventURLAll,assignmentURLCreate} from "../Setting.js";
 
 const AssignmentForm = () => {
   const [familyname, setFamilyname] = useState('');
@@ -10,14 +11,12 @@ const AssignmentForm = () => {
   const [creationStatus, setCreationStatus] = useState('');
 
   useEffect(() => {
-    fetch("http://localhost:8080/exam/api/dinnerevents/all")
+    fetch(dinnereventURLAll)
       .then(response => response.json())
       .then(data => {
-        // Set the event names and IDs received from the backend
         setEventnames(data);
       })
       .catch(error => {
-        // Handle any errors that occurred during the request
         console.error(error);
       });
   }, []);
@@ -35,18 +34,18 @@ const AssignmentForm = () => {
   };
 
   const handleSubmit = () => {
-    // Create an object with the form data
+    // Laver et objekt med form data
     const formData = {
       familyname,
       date,
       contactInfo,
       eventname,
-      eventid: eventId, // Include the event ID in the form data
+      eventid: eventId, 
     };
     console.log(formData);
 
-    // Send the form data to the backend (replace 'apiEndpoint' with your actual endpoint)
-    fetch("http://localhost:8080/exam/api/assignments/create", {
+    // Sender form data til backend the backend
+    fetch(assignmentURLCreate, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,21 +54,20 @@ const AssignmentForm = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // Handle the response from the backend if needed
+        
         console.log(data);
 
-        // Clear the input fields by updating the state variables with empty values
+        // Tømmer lige inputfelterne
         setFamilyname('');
         setDate('');
         setContactInfo('');
         setEventname('');
         setEventId('');
 
-        // Set the creation status message
+        // bekræfter det er gået godt
         setCreationStatus('Assignment was created');
       })
       .catch(error => {
-        // Handle any errors that occurred during the request
         console.error(error);
       });
   };

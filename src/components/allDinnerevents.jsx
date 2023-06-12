@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import {dinnereventURLAll,dinnereventURLDelete} from "../Setting.js";
 
 const AllDinnerEvents = () => {
   const [dinnerEvents, setDinnerEvents] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/exam/api/dinnerevents/all')
+    fetch(dinnereventURLAll)
       .then(response => response.json())
       .then(data => setDinnerEvents(data))
       .catch(error => console.error(error));
@@ -13,7 +14,7 @@ const AllDinnerEvents = () => {
   const handleDeleteEvent = (event) => {
     console.log('Deleting event:', event);
 
-    fetch('http://localhost:8080/exam/api/dinnerevents/delete', {
+    fetch(dinnereventURLDelete, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -24,7 +25,7 @@ const AllDinnerEvents = () => {
         if (response.ok) {
           console.log('Event deleted successfully');
           // Refresh the dinner events after deletion
-          fetch('http://localhost:8080/exam/api/dinnerevents/all')
+          fetch(dinnereventURLAll)
             .then(response => response.json())
             .then(data => setDinnerEvents(data))
             .catch(error => console.error(error));

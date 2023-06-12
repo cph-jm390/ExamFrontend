@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import {dinnereventURLUpdate,dinnereventURLAll} from "../Setting.js";
 
 const EditEvents = () => {
   const [dinnerEvents, setDinnerEvents] = useState([]);
   const [editEvent, setEditEvent] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/exam/api/dinnerevents/all')
+    fetch(dinnereventURLAll)
       .then(response => response.json())
       .then(data => setDinnerEvents(data))
       .catch(error => console.error(error));
@@ -23,7 +24,7 @@ const EditEvents = () => {
         body: JSON.stringify(editEvent)
       };
 
-      fetch('http://localhost:8080/exam/api/dinnerevents/update', requestOptions)
+      fetch(dinnereventURLUpdate, requestOptions)
         .then(response => {
           if (response.ok) {
             // Update the dinner event in the local state

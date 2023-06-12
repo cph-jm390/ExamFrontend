@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import {assignmentURLAll,assignmentURLAdduser} from "../Setting.js";
 
 const AllAssignments = () => {
   const [assignments, setAssignments] = useState([]);
   const [userInputs, setUserInputs] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:8080/exam/api/assignments/all')
+    fetch(assignmentURLAll)
       .then(response => response.json())
       .then(data => {
         const initialUserInputs = data.reduce((acc, assignment) => {
@@ -27,7 +28,7 @@ const AllAssignments = () => {
 
     console.log('Data sent to POST:', requestBody);
 
-    fetch('http://localhost:8080/exam/api/assignments/adduser', {
+    fetch(assignmentURLAdduser, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
