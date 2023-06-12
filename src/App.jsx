@@ -7,6 +7,7 @@ import EditEvents from "./components/EditEvents";
 import { NavLink, Route, Routes } from "react-router-dom";
 import AllDinnerevents from "./components/allDinnerevents";
 import AssignmentForm from "./components/AssignmentForm";
+import AllAssignments from "./components/AllAssignments";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -67,6 +68,9 @@ function App() {
             <NavLink to="/assignmentform">Assign family</NavLink>
           </li>
           <li>
+            <NavLink to="/allassignments">All assignments</NavLink>
+          </li>
+          <li>
             <NavLink to="/alldinnerevents">All event</NavLink>
           </li>
               <li>
@@ -124,6 +128,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
          <Route path="/alldinnerevents" element={<AllDinnerevents user={user}/>} />
          <Route path="/assignmentform" element={<AssignmentForm/>} />
+          <Route path="/allassignments" element={<AllAssignments />} />
 
         <Route path="/logout" element={<Logout />} />
         {user.roles === "admin" && (

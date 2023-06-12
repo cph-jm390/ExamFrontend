@@ -10,6 +10,31 @@ const AllDinnerEvents = () => {
       .catch(error => console.error(error));
   }, []);
 
+  const handleDeleteEvent = (event) => {
+    console.log('Deleting event:', event);
+
+    fetch('http://localhost:8080/exam/api/dinnerevents/delete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(event)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Event deleted successfully');
+          // Refresh the dinner events after deletion
+          fetch('http://localhost:8080/exam/api/dinnerevents/all')
+            .then(response => response.json())
+            .then(data => setDinnerEvents(data))
+            .catch(error => console.error(error));
+        } else {
+          throw new Error('Failed to delete event');
+        }
+      })
+      .catch(error => console.error(error));
+  };
+
   return (
     <div>
       <h1>All Dinner Events</h1>
@@ -23,6 +48,7 @@ const AllDinnerEvents = () => {
               <th>Dish</th>
               <th>Location</th>
               <th>Price</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +58,11 @@ const AllDinnerEvents = () => {
                 <td>{event.dish}</td>
                 <td>{event.location}</td>
                 <td>{event.price}</td>
+                <td>
+                  <button onClick={() => handleDeleteEvent(event)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
