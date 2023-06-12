@@ -9,7 +9,7 @@ const DinnereventForm = () => {
  
 
   const handleSubmit = () => {
-    // Create an object with the form data
+    // laver et objekt med form data
     const formData = {
       eventname,
         location,
@@ -18,7 +18,7 @@ const DinnereventForm = () => {
     };
     console.log(formData);
 
-    // Send the form data to the backend (replace 'apiEndpoint' with your actual endpoint)
+    // Sender form data til backend 
     fetch(dinnereventURLCreate, {
       method: 'POST',
       headers: {
@@ -28,11 +28,9 @@ const DinnereventForm = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // Handle the response from the backend if needed
         console.log(data);
       })
       .catch(error => {
-        // Handle any errors that occurred during the request
         console.error(error);
       });
   };

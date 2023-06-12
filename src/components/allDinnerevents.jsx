@@ -24,7 +24,7 @@ const AllDinnerEvents = () => {
       .then(response => {
         if (response.ok) {
           console.log('Event deleted successfully');
-          // Refresh the dinner events after deletion
+          // Henter alle events igen efter sletning
           fetch(dinnereventURLAll)
             .then(response => response.json())
             .then(data => setDinnerEvents(data))

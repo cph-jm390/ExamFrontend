@@ -27,13 +27,13 @@ const EditEvents = () => {
       fetch(dinnereventURLUpdate, requestOptions)
         .then(response => {
           if (response.ok) {
-            // Update the dinner event in the local state
+            // opdaterer dinner event
             setDinnerEvents(prevEvents =>
               prevEvents.map(prevEvent =>
                 prevEvent.id === editEvent.id ? editEvent : prevEvent
               )
             );
-            // Reset the edit event
+            // Resetter edit event
             setEditEvent(null);
           } else {
             throw new Error('Failed to update dinner event');

@@ -50,6 +50,7 @@ function App() {
         <li>
             <NavLink to="/">Home</NavLink>
           </li>
+          {/* frontend limiter ud fra roller */}
           {loggedIn && (
             <>
               {user.roles === "admin" && (
@@ -131,6 +132,7 @@ function App() {
           <Route path="/allassignments" element={<AllAssignments />} />
 
         <Route path="/logout" element={<Logout />} />
+        {/* front end limiter ud fra roller */}
         {user.roles === "admin" && (
           <>
             <Route path="/dinnerform" element={<DinnereventForm />} />
