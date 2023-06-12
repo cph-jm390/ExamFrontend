@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import facade from "./apiFacade";
 import LogIn from "./components/LoginForm";
 import LoggedIn from "./components/LoggedIn";
-import TripForm from "./components/TripForm";
 import DinnereventForm from "./components/DinnereventForm";
 import EditEvents from "./components/EditEvents";
 import { NavLink, Route, Routes } from "react-router-dom";
-import AssignToTrips from "./components/AssignToTrips";
-import EditTrips from "./components/EditTrips";
 import AllDinnerevents from "./components/allDinnerevents";
+import AssignmentForm from "./components/AssignmentForm";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -63,14 +61,13 @@ function App() {
                     <NavLink to="/editevents">Edit events</NavLink>
                   </li>
                   
-                  <li>
-                    <NavLink to="/edittrips">Edit Trip</NavLink>
-                  </li>
                 </>
               )}
-              
+              <li>
+            <NavLink to="/assignmentform">Assign family</NavLink>
+          </li>
           <li>
-            <NavLink to="/alldinnerevents">All events</NavLink>
+            <NavLink to="/alldinnerevents">All event</NavLink>
           </li>
               <li>
                 <NavLink to="/profilepage">Profile</NavLink>
@@ -125,15 +122,14 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
-         <Route path="/assigntotrips" element={<AssignToTrips  user={user} />} />
          <Route path="/alldinnerevents" element={<AllDinnerevents user={user}/>} />
+         <Route path="/assignmentform" element={<AssignmentForm/>} />
+
         <Route path="/logout" element={<Logout />} />
         {user.roles === "admin" && (
           <>
             <Route path="/dinnerform" element={<DinnereventForm />} />
             <Route path="/editevents" element={<EditEvents />} />
-            <Route path="/tripform" element={<TripForm />} />
-            
           </>
         )}
         <Route

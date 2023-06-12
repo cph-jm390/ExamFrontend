@@ -1,0 +1,112 @@
+import React, { useState, useEffect } from 'react';
+
+const AssignmentForm = () => {
+  const [familyname, setFamilyname] = useState('');
+  const [date, setDate] = useState('');
+  const [contactInfo, setContactInfo] = useState('');
+  const [eventname, setEventname] = useState('');
+  const [eventId, setEventId] = useState('');
+  const [eventnames, setEventnames] = useState([]);
+  const [creationStatus, setCreationStatus] = useState('');
+
+  useEffect(() => {
+    fetch("http://localhost:8080/exam/api/dinnerevents/all")
+      .then(response => response.json())
+      .then(data => {
+        // Set the event names and IDs received from the backend
+        setEventnames(data);
+      })
+      .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error(error);
+      });
+  }, []);
+
+  const handleEventSelection = (event) => {
+    const selectedEvent = event.target.value;
+    const eventItem = eventnames.find(item => item.eventname === selectedEvent);
+    if (eventItem) {
+      setEventname(selectedEvent);
+      setEventId(eventItem.id);
+    } else {
+      setEventname('');
+      setEventId('');
+    }
+  };
+
+  const handleSubmit = () => {
+    // Create an object with the form data
+    const formData = {
+      familyname,
+      date,
+      contactInfo,
+      eventname,
+      eventid: eventId, // Include the event ID in the form data
+    };
+    console.log(formData);
+
+    // Send the form data to the backend (replace 'apiEndpoint' with your actual endpoint)
+    fetch("http://localhost:8080/exam/api/assignments/create", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the response from the backend if needed
+        console.log(data);
+
+        // Clear the input fields by updating the state variables with empty values
+        setFamilyname('');
+        setDate('');
+        setContactInfo('');
+        setEventname('');
+        setEventId('');
+
+        // Set the creation status message
+        setCreationStatus('Assignment was created');
+      })
+      .catch(error => {
+        // Handle any errors that occurred during the request
+        console.error(error);
+      });
+  };
+
+  return (
+    <div>
+      {creationStatus && <p>{creationStatus}</p>}
+      <label>
+        Assign Event:
+        <select value={eventname} onChange={handleEventSelection}>
+          <option value="">Select an event</option>
+          {eventnames.map((eventItem, index) => (
+            <option key={index} value={eventItem.eventname}>
+              {eventItem.eventname}
+            </option>
+          ))}
+        </select>
+      </label>
+      <br />
+      <label>
+        Familyname:
+        <input type="text" value={familyname} onChange={e => setFamilyname(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Date:
+        <input type="text" value={date} onChange={e => setDate(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Contact Info:
+        <input type="text" value={contactInfo} onChange={e => setContactInfo(e.target.value)} />
+      </label>
+      <br />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+};
+
+export default AssignmentForm;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const AllDinnerEvents = ({ user }) => {
+const AllDinnerEvents = () => {
   const [dinnerEvents, setDinnerEvents] = useState([]);
 
   useEffect(() => {
@@ -9,34 +9,6 @@ const AllDinnerEvents = ({ user }) => {
       .then(data => setDinnerEvents(data))
       .catch(error => console.error(error));
   }, []);
-
-  const handleAssignFamily = dinnerEvent => {
-    const requestBody = {
-      user: {
-        ...user,
-        user_email: user.username
-      },
-      dinnerEvent
-    };
-
-    console.log('Request Body:', requestBody);
-
-    fetch('http://localhost:8080/exam/api/dinnerevents/assignFamily', {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('Family assigned successfully');
-        } else {
-          throw new Error('Failed to assign family');
-        }
-      })
-      .catch(error => console.error(error));
-  };
 
   return (
     <div>
@@ -51,7 +23,6 @@ const AllDinnerEvents = ({ user }) => {
               <th>Dish</th>
               <th>Location</th>
               <th>Price</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -61,11 +32,6 @@ const AllDinnerEvents = ({ user }) => {
                 <td>{event.dish}</td>
                 <td>{event.location}</td>
                 <td>{event.price}</td>
-                <td>
-                  <button onClick={() => handleAssignFamily(event)}>
-                    Assign My Family
-                  </button>
-                </td>
               </tr>
             ))}
           </tbody>
