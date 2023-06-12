@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-import {guideURL} from "../Setting.js";
-const GuideForm = () => {
+import {dinnereventURLCreate} from "../Setting.js";
+const DinnereventForm = () => {
   
-  const [GUIDE_NAME, setGuideName] = useState('');
-  const [gender, setGender] = useState('');
-  const [birthyear, setBirthyear] = useState('');
-  const [profile, setProfile] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [eventname, setEventname] = useState('');
+  const [location, setLocation] = useState('');
+  const [dish, setDish] = useState('');
+  const [price, setPrice] = useState('');
+ 
 
   const handleSubmit = () => {
     // Create an object with the form data
     const formData = {
-      GUIDE_NAME,
-        gender,
-        birthyear,
-        profile,
-        imageUrl,
+      eventname,
+        location,
+        dish,
+        price,
     };
     console.log(formData);
 
     // Send the form data to the backend (replace 'apiEndpoint' with your actual endpoint)
-    fetch(guideURL, {
+    fetch(dinnereventURLCreate, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,47 +40,38 @@ const GuideForm = () => {
   return (
     <div>
       <label>
-        Guide Name
+        Eventname
         <input
           type="text"
-          value={GUIDE_NAME}
-          onChange={e => setGuideName(e.target.value)}
+          value={eventname}
+          onChange={e => setEventname(e.target.value)}
         />
       </label>
       <br />
       <label>
-        Gender:
+        Location:
         <input
           type="text"
-          value={gender}
-          onChange={e => setGender(e.target.value)}
+          value={location}
+          onChange={e => setLocation(e.target.value)}
         />
       </label>
       <br />
       <label>
-        Birthyear:
+        Dish:
         <input
           type="text"
-          value={birthyear}
-          onChange={e => setBirthyear(e.target.value)}
+          value={dish}
+          onChange={e => setDish(e.target.value)}
         />
       </label>
       <br />
       <label>
-        Profile:
+        Price:
         <input
           type="text"
-          value={profile}
-          onChange={e => setProfile(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Image link:
-        <input
-          type="text"
-          value={imageUrl}
-          onChange={e => setImageUrl(e.target.value)}
+          value={price}
+          onChange={e => setPrice(e.target.value)}
         />
       </label>
       <br />
@@ -90,4 +80,4 @@ const GuideForm = () => {
   );
 };
 
-export default GuideForm;
+export default DinnereventForm;

@@ -3,7 +3,7 @@ import facade from "./apiFacade";
 import LogIn from "./components/LoginForm";
 import LoggedIn from "./components/LoggedIn";
 import TripForm from "./components/TripForm";
-import GuideForm from "./components/GuideForm";
+import DinnereventForm from "./components/DinnereventForm";
 import GetAllGuides from "./components/GetAllGuides";
 import { NavLink, Route, Routes } from "react-router-dom";
 import AssignToTrips from "./components/AssignToTrips";
@@ -55,7 +55,7 @@ function App() {
               {user.roles === "admin" && (
                 <>
                   <li>
-                    <NavLink to="/guideform">Guide Form</NavLink>
+                    <NavLink to="/dinnerform">Guide Form</NavLink>
                   </li>
                   <li>
                     <NavLink to="/tripform">Trip Form</NavLink>
@@ -129,7 +129,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         {user.roles === "admin" && (
           <>
-            <Route path="/guideform" element={<GuideForm />} />
+            <Route path="/dinnerform" element={<DinnereventForm />} />
             <Route path="/edittrips" element={<EditTrips />} />
             <Route path="/tripform" element={<TripForm />} />
             <Route path="/getallguides" element={<GetAllGuides />} />
